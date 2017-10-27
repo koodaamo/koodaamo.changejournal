@@ -1,0 +1,53 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="vidamin.plone.tablepage">
+
+<body>
+
+    <metal:block fill-slot="main"  tal:define="timestamps view/timestamps">
+
+   <div d="content-core">
+
+    <h2 class="documentFirstHeading">Access timestamps</h2>
+
+    <p class="documentDescription">
+      Keyed access timestamps given as Unix timestamps, ie. seconds since epoch.
+    </p>
+
+
+    <div style="width: 100%; overflow:auto;">
+
+       <table id="listing-table" class="listing" tal:condition="timestamps">
+         <thead>
+            <tr>
+               <th>key</th><th>timestamp</th>
+            </tr>
+         </thead>
+         <tbody>
+            <tr tal:repeat="(key,timestamp) timestamps">
+               <td tal:content="key"/><td tal:content="timestamp"/>
+            </tr>
+         </tbody>
+         <tfoot>
+         </tfoot>
+      </table>
+
+    </div>
+
+      <strong tal:condition="not:timestamps">No timestamps.</strong>
+
+
+     <div tal:condition="timestamps">
+         <metal:block use-macro="context/@@ploneform-macros/form" />
+     </div>
+
+   </div>
+   </metal:block>
+
+</body>
+</html>
+

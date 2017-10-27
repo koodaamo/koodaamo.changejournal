@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<object name="portal_actions" meta_type="Plone Actions Tool"
+   xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+
+ <object name="object" meta_type="CMF Action Category">
+  <property name="title"></property>
+
+  <object name="timestamps" meta_type="CMF Action">
+   <property name="title">Timestamps</property>
+   <property name="description">Access timestamps</property>
+   <property name="url_expr">string:@@review-timestamps</property>
+   <property name="link_target"></property>
+   <property name="icon_expr"></property>
+   <property
+      name="available_expr">python:object.restrictedTraverse('@@plone_interface_info').provides('koodaamo.changejournal.interfaces.IPortalAccessTimestamped')</property>
+   <property name="permissions">
+    <element value="Manage portal"/>
+   </property>
+   <property name="visible">True</property>
+  </object>
+
+ </object>
+
+</object>
+

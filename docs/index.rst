@@ -1,0 +1,5 @@
+====================
+koodaamo.changejournal
+====================
+
+User documentation

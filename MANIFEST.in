@@ -1,0 +1,4 @@
+graft src/koodaamo
+graft docs
+include *.rst
+global-exclude *.pyc

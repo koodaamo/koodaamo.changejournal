@@ -1,0 +1,51 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="vidamin.plone.tablepage">
+
+<body>
+
+    <metal:block fill-slot="main" tal:define="journal view/journal">
+
+    <h2 class="documentFirstHeading">Journal of changes</h2>
+
+    <p class="documentDescription">Recent changes journal, earliest changes first.</p>
+
+    <p>A journal of changes is started after keyed, timestamped request(s) for changes, followed by changes (to data). When journal entries become older than all timestamps, they are removed.</p>
+
+
+    <div style="width: 100%; overflow:auto;" tal:condition="journal">
+    <table id="listing-table" class="listing">
+      <thead>
+         <tr>
+            <th>timestamp</th><th>operation</th><th>record</th>
+         </tr>
+      </thead>
+      <tbody>
+         <tr tal:repeat="entry journal">
+            <td tal:repeat="value entry" tal:content="value"/>
+         </tr>
+      </tbody>
+      <tfoot>
+         <tr>
+            <th>timestamp</th><th>operation</th><th>record</th>
+         </tr>
+      </tfoot>
+   </table>
+   </div>
+
+   <div tal:condition="journal">
+       <metal:block use-macro="context/@@ploneform-macros/form" />
+   </div>
+
+   <strong tal:condition="not: journal">No journal entries.</strong>
+
+   </metal:block>
+
+</body>
+</html>
+
+

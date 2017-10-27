@@ -1,0 +1,6 @@
+[report]
+include =
+    src/koodaamo/*
+omit =
+    */test*
+    */upgrades/*

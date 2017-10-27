@@ -1,0 +1,43 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="koodaamo.changejournal">
+
+  <!-- Set overrides folder for Just-a-Bunch-Of-Templates product -->
+  <include package="z3c.jbot" file="meta.zcml" />
+  <browser:jbot
+      directory="overrides"
+      layer="koodaamo.changejournal.interfaces.IKoodaamoChangejournalLayer"
+      />
+
+  <!-- Publish static files -->
+  <plone:static
+      name="koodaamo.changejournal"
+      type="plone"
+      directory="static"
+      />
+
+  <browser:page
+ 	  for="..interfaces.IPortalChangeJournaled"
+ 	  name="changes"
+	  class=".views.GetChanges"
+	  permission="zope2.View"
+	 />
+
+   <browser:page
+      for="*"
+      name="review-timestamps"
+      permission="zope2.View"
+      class=".views.TimestampingReviewForm"
+   />
+
+  <browser:page
+ 	  for="..interfaces.IPortalChangeJournaled"
+ 	  name="review-changes"
+	  class=".forms.ChangesReviewForm"
+	  template="templates/changes_review_template.pt"
+	  permission="zope2.View"
+	 />
+
+</configure>
