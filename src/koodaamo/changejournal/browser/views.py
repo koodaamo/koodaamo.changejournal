@@ -86,7 +86,6 @@ class TimestampingReviewForm(form.Form):
          return timestamps.items()
 
 
-
 @implementer(IPublishTraverse)
 class GetChanges(BrowserView):
    "return journal, as JSON or as HTML representation"
@@ -97,3 +96,32 @@ class GetChanges(BrowserView):
       "set key given as URL path parameter"
       self.timestampkey = key
       return self
+
+   @property
+   def timestamp(self):
+      try:
+         timestampkey = self.timestampkey
+      except:
+         return 0
+      else:
+         return IAccessTimestamped(self.context).get(timestampkey) or 0
+
+   @property
+   def journal(self):
+      return IChangeJournaled(self.context).retrieve(since=self.timestamp)
+
+   @jsonify
+   def asjson(self, data):
+      return data
+
+   def __call__(self):
+
+      if not hasattr(self, "timestampkey"):
+         self.request.response.redirect("@@review-changes")
+         return
+
+      with timestamped_journal(self.timestampkey, self.context) as journal:
+         if "json" in self.request.get_header("accept"):
+            return self.asjson(journal)
+         else:
+            return self.html_changes_template(journal=journal)
