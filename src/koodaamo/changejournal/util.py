@@ -1,4 +1,5 @@
 from contextlib import contextmanager
+import ujson
 from .interfaces import IAccessTimestamped
 from .interfaces import IChangeJournaled
 
@@ -40,3 +41,16 @@ def timestamped_journals(key, objs):
          combined_journal.extend(journal)
    yield combined_journal
 
+
+def jsonify(method):
+   "wrap-in-container-data-structure decorator for JSON app responses"
+
+   def wrapper(view, *args, **kwargs):
+      "set content type and return JSON"
+      view.request.RESPONSE.setHeader('Content-type', 'application/json;charset=utf-8')
+      result = method(view, *args, **kwargs)
+      if type(result) not in (tuple, list):
+         result = [result] # wrap in container
+      return ujson.dumps(result, ensure_ascii=False)
+
+   return wrapper

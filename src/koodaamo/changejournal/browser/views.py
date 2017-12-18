@@ -9,8 +9,10 @@ from zope.schema.vocabulary import SimpleVocabulary
 from zope import schema
 from plone.supermodel import model
 
-from .interfaces import IAccessTimestamped
+from ..interfaces import IAccessTimestamped
+from ..util import jsonify
 from .. import TIMESTAMPS_KEY
+from .. import _
 
 
 @provider(IContextSourceBinder)
@@ -52,7 +54,7 @@ class TimestampingReviewForm(form.Form):
    ignoreContext=True
    fields = field.Fields(ITimeStampResetting)
 
-   template = ViewPageTemplateFile('timestamps.pt')
+   template = ViewPageTemplateFile('templates/timestamps.pt')
 
    @button.buttonAndHandler(u'Reset')
    def handleApply(self, action):
