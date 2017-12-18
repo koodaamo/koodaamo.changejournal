@@ -19,6 +19,20 @@
    <property name="visible">True</property>
   </object>
 
+  <object name="changes" meta_type="CMF Action">
+   <property name="title">Changes</property>
+   <property name="description">Change journal</property>
+   <property name="url_expr">string:@@review-changes</property>
+   <property name="link_target"></property>
+   <property name="icon_expr"></property>
+   <property
+      name="available_expr">python:object.restrictedTraverse('@@plone_interface_info').provides('koodaamo.changejournal.interfaces.IPortalChangeJournaled')</property>
+   <property name="permissions">
+    <element value="Manage portal"/>
+   </property>
+   <property name="visible">True</property>
+  </object>
+
  </object>
 
 </object>
