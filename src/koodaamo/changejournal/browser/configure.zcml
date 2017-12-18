@@ -12,6 +12,8 @@
       />
 
   <!-- Publish static files -->
+
+  <include package="plone.resource" file="meta.zcml"/>`
   <plone:static
       name="koodaamo.changejournal"
       type="plone"
