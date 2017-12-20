@@ -1,10 +1,13 @@
 import time
 from persistent.dict import PersistentDict
+from persistent.list import PersistentList
 from zope.interface import implementer
 from zope.annotation.interfaces import IAnnotations
 
 from .interfaces import IAccessTimestamped
 from .interfaces import IChangeJournaled
+from .interfaces import IJournaledRecordGenerator
+
 from . import TIMESTAMPS_KEY
 
 
@@ -82,7 +85,7 @@ class ChangeJournaled(object):
    def contentsjournal(self):
       "produce a journal of current contents"
       ts = time.time()
-      return [(ts, 1, record) for record in ISimpleRecordContainer(self.context)]
+      return [(ts, 1, record) for record in IJournaledRecordGenerator(self.context)]
 
    def log(self, operation, record):
       "make a new journal entry"

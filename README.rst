@@ -6,33 +6,27 @@
 koodaamo.changejournal
 ======================
 
-Tell me what your product does
+Manage access timestamps and a journal of changes.
 
 Features
 --------
 
-- Can be bullet points
+- Provides access timestamps
+- Provides a journal of changes
 
 
-Examples
+Usage
 --------
 
-This add-on can be seen in action at the following sites:
-- Is there a page on the internet where everybody can see the features?
+Prepare your content for timestamped access:
 
+- assign IPortalAccessTimestamped for the content
 
-Documentation
--------------
+Prepare your content for tracking:
 
-Full documentation for end users can be found in the "docs" folder, and is also available online at http://docs.plone.org/foo/bar
-
-
-Translations
-------------
-
-This product has been translated into
-
-- Klingon (thanks, K'Plai)
+- assign IPortalChangeJournaled to the content to be tracked
+- implement a IJournaledRecordGenerator adapter that adapts the
+  content to prodvidee a data records iterator
 
 
 Installation
@@ -63,7 +57,6 @@ Support
 -------
 
 If you are having issues, please let us know.
-We have a mailing list located at: project@example.com
 
 
 License

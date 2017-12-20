@@ -33,6 +33,13 @@ class IChangeJournaled(Interface):
       "retrieve log entries since a given timestamp (as seconds since epoch)"
 
 
+class IJournaledRecordGenerator(Interface):
+   "iterable journaled record source"
+
+   def __iter__(self):
+      "must provide a record iterator"
+
+
 class IPortalChangeJournaled(Interface):
    "marker for journaling content"
 
